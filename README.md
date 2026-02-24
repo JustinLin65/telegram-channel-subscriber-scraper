@@ -6,10 +6,10 @@
 由於 Telegram API 的限制，一般方式無法直接獲取完整的成員列表。本工具透過 **關鍵字迭代搜尋技術 (A-Z, 0-9)**，盡可能繞過限制並最大化抓取到的成員數量。
 
 ## 核心功能
-
+- **最近成員捕捉**：優先獲取前 200 名最近加入的活躍成員。
 - **深度搜尋抓取**：遍歷 `a-z` 與 `0-9` 關鍵字進行窮舉搜尋，突破預設的顯示限制。
 - **自動去重機制**：使用 Python 字典結構（Dict）處理資料，確保輸出的成員名單唯一不重複。
-- **詳細資料導出**：支援導出 User ID、Username、姓名及電話（若對方開放權限）。
+- **詳細資料導出**：匯出資訊包含 User ID、Username、姓名及電話（若對方開放權限）。
 - **頻率限制保護**：內建 `asyncio.sleep` 機制，有效避免因請求過快觸發 Telegram 的 Rate Limit。
 - **Excel 友善格式**：輸出為 `UTF-8-sig` 編碼的 CSV 檔案，確保在 Excel 中開啟不發生亂碼。
 
@@ -32,10 +32,11 @@
 
     開啟 `TG.py`，修改 `設定區` 的內容：
     ```python
-    api_id = '你的_API_ID'
-    api_hash = '你的_API_HASH'
-    phone = '你的電話'           # 格式如 +886912345678
-    channel_id = '頻道連結或ID'  # 支援連結 ([https://t.me/xxx](https://t.me/xxx)) 或 ID (-100xxx)
+    api_id = '12345678'  # 請替換為你的 API ID
+    api_hash = 'abcdef1234567890abcdef1234567890'  # 請替換為你的 API Hash
+    phone = '+886123456789'  # 請替換為你的電話號碼
+    channel_id = 'https://t.me/yourchannel'  # 請替換為你要抓取的頻道連結或ID
+    output_file = "channel_subscribers.csv"
     ```
 
 4. **啟動程式**
